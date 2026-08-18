@@ -4,6 +4,7 @@
  */
 package clinic;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import patients.Patient;
@@ -35,7 +36,7 @@ public class WaitingRoomList implements SecuentialDynamicLists<Patient> {
     }
 
     @Override
-    public Object getAll() {
+    public Iterator getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
