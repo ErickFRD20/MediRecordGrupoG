@@ -55,7 +55,7 @@ public class Appointment {
     }
     
     public void reschedule(LocalDate newDate, LocalTime newTime){
-        
+   
     }
 
     public void cancel(){
