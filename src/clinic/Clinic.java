@@ -5,6 +5,8 @@
 package clinic;
 
 import appointments.Appointment;
+import appointments.AppointmentStatus;
+import appointments.AppointmentsList;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Iterator;
@@ -18,18 +20,19 @@ import patients.PatientsList;
 public class Clinic {
     
     private PatientsList patient;
-    private AppointmentsLists appointment;
+    private AppointmentsList appointment;
     private WaitingRoomList waitingRoom;
 
     //Construc
     public Clinic() {
         this.patient = new PatientsList();
-        this.appointment = new AppointmentsLists();
+        this.appointment = new AppointmentsList();
         this.waitingRoom = new WaitingRoomList();
     }
     
-    public void addPatient(Patient newpatient){
+    public boolean addPatient(Patient newpatient){
         patient.add(newpatient);
+        return true;
     }
 
     public Patient findPatient(String id){
@@ -39,11 +42,12 @@ public class Clinic {
         return savePat;
     }
 
-    public void removePatient(String id){
-        if (patient.isEmpty())return;
+    public boolean removePatient(String id){
+        if (patient.isEmpty())return false ;
         Patient clearPat = patient.get(id);
-        if (clearPat == null)return;                        
+        if (clearPat == null)return false;                        
         patient.remove(clearPat);
+        return true;
     }
 
     public Iterator<Patient> getPatients(){
@@ -51,11 +55,9 @@ public class Clinic {
         return patient.getAll();
     }
 
-    public boolean scheduleAppointment(Appointment newAppointment){
-        
+    public boolean scheduleAppointment(Appointment newAppointment){        
         if(findPatient(newAppointment.getPatient().getId()) == null)return false;
-        if(appointment.add(newAppointment)) return true;
-        return false;
+        return appointment.add(newAppointment);
     }
 
     public Appointment findAppointment(String code){
@@ -65,8 +67,7 @@ public class Clinic {
         return saveApp;
     }
 
-    public boolean rescheduleAppointment(String code, LocalDate newDate, LocalTime newTime){
-        
+    public boolean rescheduleAppointment(String code, LocalDate newDate, LocalTime newTime){        
         if (appointment.isEmpty()) return false;
         Appointment saveApp = appointment.get(code);
         if (saveApp == null) return false;
@@ -78,22 +79,21 @@ public class Clinic {
         if (appointment.isEmpty()) return false;
         Appointment cancApp = appointment.get(code);
         if (cancApp == null) return false;
-        appointment.remove(cancApp); 
+        appointment.cancel();
         return true;
     }
 
-    public Iterator<Appointment> getAppointments(){
-        
+    public Iterator<Appointment> getAppointments(){        
         if (appointment.isEmpty()) return null;
         return appointment.getAll();
     }
 
-    public boolean checkInPatient(String patientId){
-        
+    public boolean checkInPatient(String patientId){        
         Iterator<Appointment> itApp = appointment.getAll();
         while (itApp.hasNext()){ //si hay nueva cita
             Appointment app = itApp.next(); //nos da la cita
             if (app.getPatient().getId().equals(patientId)&&app.isToday()){
+                app.setStatus(AppointmentStatus.CHECKED_IN);
                 waitingRoom.add(app.getPatient());
                 return true;
             }                
