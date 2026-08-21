@@ -12,7 +12,7 @@ import patients.Patient;
  *
  * @author jprod
  */
-public class Appointment {
+public class Appointment implements Comparable<Appointment> {
     //implememtar Comparable<Appointment>
     private String code;
     private Patient patient;
@@ -55,21 +55,49 @@ public class Appointment {
     }
     
     public void reschedule(LocalDate newDate, LocalTime newTime){
-   
+     if(this.status == AppointmentStatus.CANCELLED || this.status == AppointmentStatus.COMPLETED){
+        return;
+    }
+    this.date = newDate;
+    this.time = newTime;
+    this.status = AppointmentStatus.SCHEDULED;
     }
 
     public void cancel(){
-        
+            this.status = AppointmentStatus.CANCELLED;
     }
 
     public boolean isPending(){
-        return false;
+            return this.status == AppointmentStatus.SCHEDULED || this.status == AppointmentStatus.CHECKED_IN;
     }
 
     public boolean isToday(){
-        return false;
+            return this.date.equals(LocalDate.now());
     }
 
     //public int compareTo(Appointment other); date → time → code
 
+    @Override
+    public String toString() {
+        return "Appointment{" + 
+                "code=" + code + 
+                ", patient=" + patient +
+                ", date=" + date + 
+                ", time=" + time + 
+                ", reason=" + reason + 
+                ", status=" + status + '}';
+    }
+     @Override
+    public int compareTo(Appointment other) {
+        int dateComparison = this.date.compareTo(other.date);
+        if(dateComparison != 0){
+            return dateComparison;
+        }
+        int timeComparison = this.time.compareTo(other.time);
+        if(timeComparison != 0){
+            return timeComparison;
+        }
+        return this.code.compareTo(other.code);
+
+}
 }
