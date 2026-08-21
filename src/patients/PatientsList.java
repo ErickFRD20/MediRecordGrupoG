@@ -4,7 +4,9 @@
  */
 package patients;
 
+import clinic.KeyDynamicsLists;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -18,5 +20,41 @@ public class PatientsList implements KeyDynamicsLists<Patient,String> {
         this.patients = new HashMap();
         
     }
-    
+
+    @Override
+    public Patient get(String id) {
+        if(!patients.containsKey(id)){
+            return null;
+        }else{
+        return patients.get(id);
+        }
+    }
+
+    @Override
+    public boolean remove(String id) {
+       return patients.remove(id)!=null;
+    }
+
+    @Override
+    public boolean add(Patient item) {
+        if(patients.containsKey(item.getId())) return false;
+        return patients.put(item.getId(), item)==null;
+    }
+
+    @Override
+    public Iterator getAll() {
+       if(patients.isEmpty()) return null;
+       return patients.values().iterator();
+    }
+
+    @Override
+    public int size() {
+        return patients.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return patients.isEmpty();
+    }
+
 }
