@@ -43,12 +43,9 @@ public class Clinic {
     }
 
     public boolean removePatient(String id){
-        if (patient.isEmpty())return false ;
-        Patient clearPat = patient.get(id);
-        if (clearPat == null)return false;                        
-        patient.remove(clearPat);
-        return true;
-    }
+    if (patient.isEmpty()) return false;
+    return patient.remove(id);
+}
 
     public Iterator<Patient> getPatients(){
         if (patient.isEmpty()) return null;
@@ -79,9 +76,9 @@ public class Clinic {
         if (appointment.isEmpty()) return false;        
         Appointment cancApp = appointment.get(code);
         if (cancApp == null) return false;
-        appointment.cancel();
+        cancApp.cancel();
         return true;
-    }
+}
 
     public Iterator<Appointment> getAppointments(){        
         if (appointment.isEmpty()) return null;
