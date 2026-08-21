@@ -43,12 +43,9 @@ public class Clinic {
     }
 
     public boolean removePatient(String id){
-        if (patient.isEmpty())return false ;
-        Patient clearPat = patient.get(id);
-        if (clearPat == null)return false;                        
-        patient.remove(clearPat);
-        return true;
-    }
+    if (patient.isEmpty()) return false;
+    return patient.remove(id);
+}
 
     public Iterator<Patient> getPatients(){
         if (patient.isEmpty()) return null;
@@ -76,12 +73,12 @@ public class Clinic {
     }
 
     public boolean cancelAppointment(String code){
-        if (appointment.isEmpty()) return false;
+        if (appointment.isEmpty()) return false;        
         Appointment cancApp = appointment.get(code);
         if (cancApp == null) return false;
-        appointment.cancel();
+        cancApp.cancel();
         return true;
-    }
+}
 
     public Iterator<Appointment> getAppointments(){        
         if (appointment.isEmpty()) return null;
@@ -102,20 +99,39 @@ public class Clinic {
     }
 
     public Patient getNextPatient(){
-        return null;
+        return waitingRoom.get();
     }
 
     public Patient attendNextPatient(){
+        Patient patient = waitingRoom.get();
+
+    if (patient == null) {
         return null;
+    }
+    waitingRoom.remove();
+    return patient;
     }
 
     public int getWaitingPatientCount(){
-        return 0;
+        return waitingRoom.size();
     }
 
-    public boolean isPatientWaiting(String patientId){
-        return false;
-    }
-    
-    
+    public Iterator<Patient> getWaitingPatients(){
+        return waitingRoom.getAll();
 }
+
+    
+public boolean isPatientWaiting(String patientId){
+    Iterator<Patient> patients = waitingRoom.getAll();
+    while (patients.hasNext()) {
+        Patient patient = patients.next();
+        if (patient.getId().equals(patientId)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+}
+
