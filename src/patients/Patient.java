@@ -88,4 +88,6 @@ public class Patient {
     public boolean hasMedicalHistory(){
         return !medicalHistory.isEmpty();
     }
+    
+    
 }

@@ -17,7 +17,7 @@ public class WaitingRoomList implements SecuentialDynamicLists<Patient> {
     private Queue<Patient> waitingList;
     
     public WaitingRoomList(){
-        this.waitingList = new LinkedList();
+        this.waitingList = new LinkedList<>();
     }
 
     @Override
