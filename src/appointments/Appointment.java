@@ -54,6 +54,7 @@ public class Appointment implements Comparable<Appointment> {
         this.status = AppointmentStatus.SCHEDULED;
     }
     
+    
     public void reschedule(LocalDate newDate, LocalTime newTime){
      if(this.status == AppointmentStatus.CANCELLED || this.status == AppointmentStatus.COMPLETED){
         return;
@@ -74,7 +75,9 @@ public class Appointment implements Comparable<Appointment> {
     public boolean isToday(){
             return this.date.equals(LocalDate.now());
     }
-
+    public void setStatus(AppointmentStatus status) {
+    this.status = status;
+}
     //public int compareTo(Appointment other); date → time → code
 
     @Override
