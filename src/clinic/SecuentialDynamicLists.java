@@ -7,6 +7,7 @@ package clinic;
 /**
  *
  * @author Student
+ * @param <T>
  */
 public interface SecuentialDynamicLists<T> extends DynamicLists<T> {
     public T get();

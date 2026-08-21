@@ -4,6 +4,7 @@
  */
 package clinic;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import patients.Patient;
@@ -18,4 +19,34 @@ public class WaitingRoomList implements SecuentialDynamicLists<Patient> {
     public WaitingRoomList(){
         this.waitingList = new LinkedList();
     }
+
+    @Override
+public Patient get() {
+    return waitingList.peek();
+}
+
+@Override
+public boolean remove() {
+    return waitingList.poll() != null;
+}
+
+@Override
+public boolean add(Patient item) {
+    return waitingList.offer(item);
+}
+
+@Override
+public Iterator getAll() {
+    return waitingList.iterator();
+}
+
+@Override
+public int size() {
+    return waitingList.size();
+}
+
+@Override
+public boolean isEmpty() {
+    return waitingList.isEmpty();
+}
 }
