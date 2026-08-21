@@ -61,12 +61,13 @@ public class AppointmentsList implements
         return this.appointments.isEmpty();
 
     }
-    public boolean cancel(String id) {
+public boolean cancel(String id) {
     Appointment appointment = get(id);
     if (appointment == null) {
         return false;
     }
-    appointment.cancel();
+    appointment.cancel(); 
+    
     return true;
 }
 }
