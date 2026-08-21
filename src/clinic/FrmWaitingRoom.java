@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package clinic;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
-import patients.Patient;
+
 import patients.Patient;
 
 /**
@@ -50,33 +47,42 @@ private WaitingRoomList waitingRoom;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(305, 305, 305)
+                .addGap(330, 330, 330)
                 .addComponent(jButton1)
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(207, 207, 207)
+                .addGap(209, 209, 209)
                 .addComponent(jButton1)
-                .addContainerGap(299, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (waitingRoom.isEmpty()) {
+       Patient patient = waitingRoom.get();
+
+    if (patient == null) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "No hay pacientes en espera.",
+                "Sala de espera",
+                javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    waitingRoom.remove();
     javax.swing.JOptionPane.showMessageDialog(
             this,
-            "No hay pacientes en la sala de espera."
+            "Paciente siguiente: " + patient.getFullName(),
+            "Sala de espera",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE
     );
-    return;
-}
 
-Patient patient = waitingRoom.get();
-
-waitingRoom.remove();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
