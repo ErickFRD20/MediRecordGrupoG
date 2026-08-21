@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Iterator;
 import medicalrecords.MedicalRecord;
-import medicalrecords.MedicalRecordsList;
+import medicalrecords.MedicalsRecordsLists;
 
 /**
  *
@@ -20,7 +20,7 @@ public class Patient {
     private LocalDate birthDate;
     private String phone;
     private String email;
-    private MedicalRecordsList medicalHistory;
+    private MedicalsRecordsLists medicalHistory;
 
     public String getId() {
         return id;
@@ -60,7 +60,7 @@ public class Patient {
         this.birthDate = birthDate;
         this.phone = phone;
         this.email = email;
-        this.medicalHistory = new MedicalRecordsList();
+        this.medicalHistory = new MedicalsRecordsLists();
     }
     
     private int calculateAge(){
@@ -68,22 +68,24 @@ public class Patient {
     }
     
     public void addMedicalRecord(MedicalRecord record){
-        
+        medicalHistory.add(record);
     }
     
     public MedicalRecord getLatestMedicalRecord(){
-        return null;
+        return medicalHistory.get();
     }
     
     public MedicalRecord removeLatestMedicalRecord(){
-        return null;
+        MedicalRecord record = medicalHistory.get();
+        medicalHistory.remove();
+        return record;
     }
     
     public Iterator<MedicalRecord> getMedicalHistory() {
-        return null;
+       return medicalHistory.getAll();
     }
     
     public boolean hasMedicalHistory(){
-        return false;
+        return !medicalHistory.isEmpty();
     }
 }
