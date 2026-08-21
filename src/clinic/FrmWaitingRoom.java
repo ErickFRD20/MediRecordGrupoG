@@ -11,14 +11,15 @@ import patients.Patient;
  * @author Student
  */
 public class FrmWaitingRoom extends javax.swing.JFrame {
-private WaitingRoomList waitingRoom;
+private Clinic clinic;
     /**
      * Creates new form FrmWaitingRoom
      */
     public FrmWaitingRoom() {
     initComponents();
-    waitingRoom = new WaitingRoomList();
+    clinic = new Clinic();
 }
+
     
 
     /**
@@ -63,7 +64,7 @@ private WaitingRoomList waitingRoom;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Patient patient = waitingRoom.get();
+       Patient patient = clinic.attendNextPatient();
 
     if (patient == null) {
         javax.swing.JOptionPane.showMessageDialog(
@@ -75,7 +76,6 @@ private WaitingRoomList waitingRoom;
         return;
     }
 
-    waitingRoom.remove();
     javax.swing.JOptionPane.showMessageDialog(
             this,
             "Paciente siguiente: " + patient.getFullName(),
