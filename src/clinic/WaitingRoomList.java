@@ -21,32 +21,32 @@ public class WaitingRoomList implements SecuentialDynamicLists<Patient> {
     }
 
     @Override
-    public Patient get() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+public Patient get() {
+    return waitingList.peek();
+}
 
-    @Override
-    public boolean remove() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+@Override
+public boolean remove() {
+    return waitingList.poll() != null;
+}
 
-    @Override
-    public boolean add(Patient item) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+@Override
+public boolean add(Patient item) {
+    return waitingList.offer(item);
+}
 
-    @Override
-    public Iterator getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+@Override
+public Iterator getAll() {
+    return waitingList.iterator();
+}
 
-    @Override
-    public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+@Override
+public int size() {
+    return waitingList.size();
+}
 
-    @Override
-    public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+@Override
+public boolean isEmpty() {
+    return waitingList.isEmpty();
+}
 }
